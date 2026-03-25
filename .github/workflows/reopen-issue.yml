@@ -1,0 +1,46 @@
+name: Reopen Security Incident
+
+on:
+  issues:
+    types: [reopened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  reopen-issue:
+    name: Reopen Security Incident Issue
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Origin Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Script
+        uses: actions/github-script@v7
+        with:
+          script: |
+            require('ts-node/register');
+
+            const script = require('./.github/scripts/reopen-issue.ts');
+
+            await script({
+              github,
+              context,
+              core,
+            });
+        env:
+          ISSUE_PROJECT_ACCESS_TOKEN: ${{ secrets.ISSUE_PROJECT_ACCESS_TOKEN }}
+          TARGET_OWNER: "wso2-incubator"
+          TARGET_REPO: "dt-dashboard"
+          PROJECT_NUMBER: "9"
