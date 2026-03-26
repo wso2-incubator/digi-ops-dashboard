@@ -45,7 +45,7 @@ export function buildMarkdownTableRegex(fieldName: string): RegExp {
 export const GITHUB_ISSUE_ID_REGEX = /<!-- REPLICATED_ISSUE_ID:\s*(\d+)\s*-->/;
 
 // Standardized custom label for all replicated security incident issues
-export const INCIDENT_LABEL_NAME = "digi-ops-dashboard";
+export const INCIDENT_LABEL_NAME = process.env.INCIDENT_LABEL_NAME;
 export const INCIDENT_LABEL_COLOR = "5319E7";
 export const INCIDENT_LABEL_DESCRIPTION =
-  "Automated issue sync from digi-ops-dashboard repository";
+  "Automated issue sync from centralized repository";
