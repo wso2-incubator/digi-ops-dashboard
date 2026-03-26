@@ -102,12 +102,12 @@ Triggers when an issue is reopened. Reopens the corresponding replicated issue i
    | `GCP_REFRESH_TOKEN`          | Google OAuth2 Refresh Token                                                                                                                      |
    | `ISSUE_PROJECT_ACCESS_TOKEN` | Fine-grained PAT scoped to the Target Organization with **Repository: Issues (Read and write)** and **Organization: Projects (Read and write)**. |
 
-| Variable Name         | Description                     |
-| --------------------- | ------------------------------- |
-| `TARGET_OWNER`        | Target organization or username |
-| `TARGET_REPO`         | Target repository name          |
-| `PROJECT_NUMBER`      | GitHub Project number           |
-| `INCIDENT_LABEL_NAME` | Custom label name               |
+   | Variable Name         | Description                     |
+   | --------------------- | ------------------------------- |
+   | `TARGET_OWNER`        | Target organization or username |
+   | `TARGET_REPO`         | Target repository name          |
+   | `PROJECT_NUMBER`      | GitHub Project number           |
+   | `INCIDENT_LABEL_NAME` | Custom label name               |
 
 ### Google Cloud Setup
 
