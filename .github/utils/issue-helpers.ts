@@ -110,7 +110,7 @@ export function createClosureComment(
   if (isOriginalIssue) {
     return (
       `**Incident Closed & Synced**\n\n` +
-      `The final state of the incident report has been synced to the centralized dashboard.\n` +
+      `The final state of the incident report has been synced to the centralised dashboard.\n` +
       `The ${replicatedIssueUrl} has been updated and closed.\n\n` +
       `All incident data from the Google Doc has been synchronized to the project board.`
     );
@@ -161,7 +161,7 @@ export function createReplicationComment(
 ): string {
   return (
     `**Issue Replicated Successfully**\n\n` +
-    `A replicated ticket containing the parsed document data has been created in the centralized repository:\n` +
+    `A replicated ticket containing the parsed document data has been created in the centralised repository:\n` +
     `${replicatedIssueUrl}\n\n` +
     `All incident data has been synchronized to the project board.\n\n` +
     `<!-- REPLICATED_ISSUE_ID: ${replicatedIssueNumber} -->`

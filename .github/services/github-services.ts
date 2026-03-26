@@ -142,7 +142,7 @@ export async function handleProjectSyncFailure(
     // Post error comment on origin issue
     const commentBody =
       `**Incident Sync Failed**\n\n` +
-      `The system created the replicated issue but failed to map the incident data to the centralized project board. ` +
+      `The system created the replicated issue but failed to map the incident data to the centralised project board. ` +
       `The replicated issue has been rolled back (closed).\n\n` +
       `**Error Details:**\n\`\`\`\n${errorMessage}\n\`\`\``;
 

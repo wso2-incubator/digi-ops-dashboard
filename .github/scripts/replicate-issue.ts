@@ -42,7 +42,7 @@ import { createGitHubClient } from "../clients/github-client";
  * Security Incident Issue Replicator
  *
  * This module handles the automated replication of security incident reports from Google Docs
- * to a centralized GitHub repository with full GitHub Projects V2 integration.
+ * to a centralised GitHub repository with full GitHub Projects V2 integration.
  *
  * Workflow:
  * 1. Validates environment configuration
