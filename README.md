@@ -42,6 +42,11 @@ Triggers when an issue is reopened. Reopens the corresponding replicated issue i
 │   ├── google-services.ts
 │   ├── project-v2-services.ts
 │   └── template-services.ts     # Issue body template loading and rendering
+├── types/
+│   ├── github-types.ts
+│   ├── google-api-types.ts
+│   ├── incident-field-types.ts
+│   └── project-v2-types.ts
 ├── utils/
 │   ├── parsers.ts
 │   ├── dates.ts
@@ -88,7 +93,7 @@ Triggers when an issue is reopened. Reopens the corresponding replicated issue i
 
 2. **Configure GitHub Secrets**
 
-   Add the following secrets to your repository settings:
+   Add the following secrets and variables to your repository settings:
 
    | Secret Name                  | Description                                                                                                                                      |
    | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -97,16 +102,12 @@ Triggers when an issue is reopened. Reopens the corresponding replicated issue i
    | `GCP_REFRESH_TOKEN`          | Google OAuth2 Refresh Token                                                                                                                      |
    | `ISSUE_PROJECT_ACCESS_TOKEN` | Fine-grained PAT scoped to the Target Organization with **Repository: Issues (Read and write)** and **Organization: Projects (Read and write)**. |
 
-3. **Configure Environment Variables**
-
-   The workflows are pre-configured with the following default values. If you need to change them, update the `env` section in each workflow file:
-
-   ```yaml
-   env:
-     TARGET_OWNER: "wso2-incubator" # Target organization or username
-     TARGET_REPO: "dt-dashboard" # Target repository name
-     PROJECT_NUMBER: "9" # GitHub Project number
-   ```
+| Variable Name         | Description                     |
+| --------------------- | ------------------------------- |
+| `TARGET_OWNER`        | Target organization or username |
+| `TARGET_REPO`         | Target repository name          |
+| `PROJECT_NUMBER`      | GitHub Project number           |
+| `INCIDENT_LABEL_NAME` | Custom label name               |
 
 ### Google Cloud Setup
 
