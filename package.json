@@ -7,16 +7,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IshanHansaka/digi-ops-dashboard.git"
+    "url": "git+https://github.com/wso2-incubator/digi-ops-dashboard.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "WSO2 LLC",
   "license": "Apache-2.0",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/IshanHansaka/digi-ops-dashboard/issues"
+    "url": "https://github.com/wso2-incubator/digi-ops-dashboard/issues"
   },
-  "homepage": "https://github.com/IshanHansaka/digi-ops-dashboard#readme",
+  "homepage": "https://github.com/wso2-incubator/digi-ops-dashboard#readme",
   "dependencies": {
     "googleapis": "^171.4.0",
     "ts-node": "^10.9.2"
