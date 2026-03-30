@@ -19,7 +19,6 @@ export const GOOGLE_DOC_URL_REGEX =
   /docs\.google\.com\/document\/d\/([a-zA-Z0-9-_]+)/;
 
 // Matches the Incident Number from the security incident report header
-// e.g. "Security Incident Report: INCIDENT-1234" 
 export const INCIDENT_REPORT_HEADER_REGEX =
   /Security Incident Report:\s*(?:\*\*|__)?\s*([a-zA-Z0-9-]+)/i;
 
@@ -45,7 +44,7 @@ export function buildMarkdownTableRegex(fieldName: string): RegExp {
 export const GITHUB_ISSUE_ID_REGEX = /<!-- REPLICATED_ISSUE_ID:\s*(\d+)\s*-->/;
 
 // Standardized custom label for all replicated security incident issues
-export const INCIDENT_LABEL_NAME = process.env.INCIDENT_LABEL_NAME;
+export const INCIDENT_LABEL_NAME = "digi-ops-dashboard";
 export const INCIDENT_LABEL_COLOR = "5319E7";
 export const INCIDENT_LABEL_DESCRIPTION =
-  "Automated issue sync from centralized repository";
+  "Automated issue replicated from centralised repository";

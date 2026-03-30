@@ -49,4 +49,3 @@ jobs:
           TARGET_OWNER: ${{ vars.TARGET_OWNER }}
           TARGET_REPO: ${{ vars.TARGET_REPO }}
           PROJECT_NUMBER: ${{ vars.PROJECT_NUMBER }}
-          INCIDENT_LABEL_NAME: ${{ vars.INCIDENT_LABEL_NAME }}
