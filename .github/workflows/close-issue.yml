@@ -1,0 +1,51 @@
+name: Finalize & Close Security Incident Issue
+
+on:
+  issues:
+    types: [closed]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  finalize-and-close:
+    name: Sync Final Doc Data & Close
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Origin Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Script
+        uses: actions/github-script@v7
+        with:
+          script: |
+            require('ts-node/register');
+
+            const script = require('./.github/scripts/close-issue.ts');
+            const { google } = require('googleapis');
+
+            await script({
+              github,
+              context,
+              core,
+              google: google,
+            });
+        env:
+          GCP_CLIENT_ID: ${{ secrets.GCP_CLIENT_ID }}
+          GCP_CLIENT_SECRET: ${{ secrets.GCP_CLIENT_SECRET }}
+          GCP_REFRESH_TOKEN: ${{ secrets.GCP_REFRESH_TOKEN }}
+          ISSUE_PROJECT_ACCESS_TOKEN: ${{ secrets.ISSUE_PROJECT_ACCESS_TOKEN }}
+          TARGET_OWNER: ${{ vars.TARGET_OWNER }}
+          TARGET_REPO: ${{ vars.TARGET_REPO }}
+          PROJECT_NUMBER: ${{ vars.PROJECT_NUMBER }}
