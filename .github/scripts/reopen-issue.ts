@@ -33,12 +33,7 @@ import { postComment, updateIssue } from "../services/github-services";
  * 2. Reopens the replicated issue in the target repository.
  * 3. Posts comments on both the original and replicated issues to notify about the reopening.
  */
-module.exports = async ({
-  context,
-  core,
-  github,
-  getOctokit,
-}: any): Promise<void> => {
+module.exports = async ({ context, core, github }: any): Promise<void> => {
   try {
     core.info("Starting Reopen Issue Process...");
 
@@ -56,11 +51,7 @@ module.exports = async ({
     const projectNumber = parseInt(config.PROJECT_NUMBER, 10);
 
     // Authenticate Target Client
-    const githubClient = createGitHubClient(
-      config.ISSUE_PROJECT_ACCESS_TOKEN,
-      getOctokit,
-      github,
-    );
+    const githubClient = createGitHubClient(config.ISSUE_PROJECT_ACCESS_TOKEN);
 
     const replicatedIssue = await fetchReplicatedIssueContext(
       github,

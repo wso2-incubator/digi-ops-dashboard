@@ -139,13 +139,13 @@ export async function handleProjectSyncFailure(
       `Rollback successful: Issue #${newIssueNumber} has been closed.`,
     );
 
-    // Post error comment on origin issue
     const commentBody =
       `**Incident Sync Failed**\n\n` +
       `The system created the replicated issue but failed to map the incident data to the centralised project board. ` +
       `The replicated issue has been rolled back (closed).\n\n` +
       `**Error Details:**\n\`\`\`\n${errorMessage}\n\`\`\``;
 
+    // Post error comment on replicated issue
     await postComment(
       targetClient,
       targetOwner,

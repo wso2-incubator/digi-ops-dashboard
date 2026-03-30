@@ -14,17 +14,12 @@
 // specific language governing permissions and limitations
 // under the License.
 import { OctokitClient } from "../types/github-types";
+import { getOctokit } from "@actions/github";
 
 /**
  * Factory function to create a GitHub client instance.
  * This abstracts away the client creation logic and allows for easier testing and flexibility.
  */
-export function createGitHubClient(
-  token: string,
-  getOctokit?: any,
-  github?: any,
-): OctokitClient {
-  return typeof getOctokit === "function"
-    ? getOctokit(token)
-    : new github.constructor({ auth: token });
+export function createGitHubClient(token: string): OctokitClient {
+  return getOctokit(token);
 }

@@ -22,7 +22,7 @@ export interface IssueDetails {
   number: number;
   html_url: string;
   node_id: string;
-  state: "open" | "closed";
+  state: string;
 }
 
 /**
@@ -30,7 +30,7 @@ export interface IssueDetails {
  */
 export interface IssueCommentData {
   user: { login: string } | null;
-  body: string | undefined;
+  body?: string | undefined;
 }
 
 export interface IssueUser {

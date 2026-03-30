@@ -52,7 +52,6 @@ module.exports = async ({
   core,
   google,
   github,
-  getOctokit,
 }: any): Promise<void> => {
   try {
     core.info("Starting Final Sync & Closure Process...");
@@ -76,11 +75,7 @@ module.exports = async ({
     const repository = context.payload.repository;
 
     // Authenticate Target Client
-    const githubClient = createGitHubClient(
-      config.ISSUE_PROJECT_ACCESS_TOKEN,
-      getOctokit,
-      github,
-    );
+    const githubClient = createGitHubClient(config.ISSUE_PROJECT_ACCESS_TOKEN);
 
     const replicatedIssue = await fetchReplicatedIssueContext(
       github,

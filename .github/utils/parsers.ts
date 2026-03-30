@@ -49,7 +49,6 @@ export function extractIssueData(payload: IssuePayload): IssueData {
 
 /**
  * Extracts the Incident Number from the Markdown header.
- * Falls back to the GitHub Issue number if the header is missing or altered.
  */
 export function extractIncidentNumber(markdown: string): string {
   const match = markdown.match(INCIDENT_REPORT_HEADER_REGEX);

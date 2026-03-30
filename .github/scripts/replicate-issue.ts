@@ -58,7 +58,6 @@ module.exports = async ({
   core,
   google,
   github,
-  getOctokit,
 }: any): Promise<void> => {
   try {
     core.info("Starting Issue Replication Workflow...");
@@ -128,11 +127,7 @@ module.exports = async ({
     const issueBody = applyTemplateReplacements(template, templateData);
 
     // Authenticate Target Client
-    const githubClient = createGitHubClient(
-      config.ISSUE_PROJECT_ACCESS_TOKEN,
-      getOctokit,
-      github,
-    );
+    const githubClient = createGitHubClient(config.ISSUE_PROJECT_ACCESS_TOKEN);
 
     await ensureLabelExists(
       githubClient,
