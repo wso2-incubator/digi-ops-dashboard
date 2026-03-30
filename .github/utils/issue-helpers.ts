@@ -42,6 +42,7 @@ import { OctokitClient, IssueDetails } from "../types/github-types";
 
 /**
  * Updates all project fields based on the field mappings configuration.
+ * Optimized to skip empty fields during initial replication to save API quota.
  */
 export async function updateAllProjectFields(
   graphql: GraphQLFunction,
@@ -50,52 +51,56 @@ export async function updateAllProjectFields(
   fields: ProjectV2FieldNode[],
   incidentData: IncidentFieldData,
 ): Promise<void> {
-  const getFieldById = (name: string) =>
-    fields.find((field) => field.name === name)?.id;
-  const getField = (name: string) =>
-    fields.find((field) => field.name === name);
+  const fieldsByName = new Map(fields.map((field) => [field.name, field]));
+  const updatePromises: Promise<void>[] = [];
 
-  // Build all update promises based on field mappings
-  const updatePromises = PROJECT_FIELD_MAPPINGS.map(
-    (mapping: ProjectFieldMapping) => {
-      const value = incidentData[mapping.dataKey];
+  for (const mapping of PROJECT_FIELD_MAPPINGS) {
+    let value: string | null = incidentData[mapping.dataKey];
+    const field = fieldsByName.get(mapping.projectFieldName);
 
-      switch (mapping.fieldType) {
-        case ProjectFieldType.TEXT:
-          return updateProjectTextField(
+    if (!field) continue;
+
+    switch (mapping.fieldType) {
+      case ProjectFieldType.TEXT:
+        updatePromises.push(
+          updateProjectTextField(
             graphql,
             projectId,
             itemId,
-            getFieldById(mapping.projectFieldName),
+            field.id,
             value,
             mapping.projectFieldName,
-          );
+          ),
+        );
+        break;
 
-        case ProjectFieldType.SINGLE_SELECT:
-          return updateProjectSingleSelectField(
+      case ProjectFieldType.SINGLE_SELECT:
+        updatePromises.push(
+          updateProjectSingleSelectField(
             graphql,
             projectId,
             itemId,
-            getField(mapping.projectFieldName),
+            field,
             value,
             mapping.projectFieldName,
-          );
+          ),
+        );
+        break;
 
-        case ProjectFieldType.DATE:
-          return updateProjectDateField(
+      case ProjectFieldType.DATE:
+        updatePromises.push(
+          updateProjectDateField(
             graphql,
             projectId,
             itemId,
-            getFieldById(mapping.projectFieldName),
+            field.id,
             formatDateForGitHub(value),
             mapping.projectFieldName,
-          );
-
-        default:
-          return Promise.resolve();
-      }
-    },
-  );
+          ),
+        );
+        break;
+    }
+  }
 
   await Promise.all(updatePromises);
 }
